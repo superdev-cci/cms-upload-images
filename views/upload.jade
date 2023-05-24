@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title Image Upload
+  body
+    h2 Upload Image
+    form(action="/uploadImage" method="post" enctype="multipart/form-data")
+      label(for="file") Select image:
+      input#file(type="file" name="file" accept="image/*")
+      br
+      br
+      input(type="submit" value="Upload Image")
