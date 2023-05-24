@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title Image Promotion Upload
+  body
+    h2 Upload Promotion Image
+    form(action="/uploadPromotionImage" method="post" enctype="multipart/form-data")
+      label(for="file") Select image:
+      input#file(type="file" name="file" accept="image/*")
+      input(type="hidden" id="product_code" name="product_code" value=productCode)
+      br
+      br
+      input(type="submit" value="Upload Image")

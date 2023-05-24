@@ -48,4 +48,28 @@ router.post("/uploadImage", upload.single("file"), async (req, res) => {
   }
 });
 
+/* POST image upload */
+router.post(
+  "/uploadPromotionImage",
+  upload.single("file"),
+  async (req, res) => {
+    try {
+      const { product_code } = req.body;
+      const updateProduct = await models.ProductPackages.update(
+        {
+          product_img: req.file.filename,
+        },
+        {
+          where: {
+            pcode: product_code,
+          },
+        }
+      );
+      res.send("Image upload successful");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 module.exports = router;

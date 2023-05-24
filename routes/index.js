@@ -54,4 +54,27 @@ router.get("/upload/product/:pcode/:tempToken", function (req, res, next) {
   res.render("upload", { title: "Upload", productCode: pcode });
 });
 
+router.get("/upload/promotion/:pcode/:tempToken", function (req, res, next) {
+  const { pcode, tempToken } = req.params;
+
+  if (!tempToken || !temporaryTokens[tempToken]) {
+    return res.status(403).send("Unauthorized");
+  }
+
+  const tokenAge = Date.now() - temporaryTokens[tempToken];
+
+  if (tokenAge > 3 * 60 * 1000) {
+    // 3 minutes
+    // If the token is more than 3 minutes old, reject it
+    delete temporaryTokens[tempToken];
+    return res.status(403).send("Unauthorized");
+  }
+
+  // If the token is valid and not expired, remove it so it can't be used again
+  delete temporaryTokens[tempToken];
+
+  // Render your HTML view here...
+  res.render("uploadPromotion", { title: "Upload", productCode: pcode });
+});
+
 module.exports = router;
