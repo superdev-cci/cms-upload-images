@@ -31,8 +31,8 @@ router.post("/handshake", function (req, res, next) {
 });
 
 /* GET upload form */
-router.get("/upload/:tempToken", function (req, res, next) {
-  const { tempToken } = req.params;
+router.get("/upload/product/:pcode/:tempToken", function (req, res, next) {
+  const { pcode, tempToken } = req.params;
 
   if (!tempToken || !temporaryTokens[tempToken]) {
     return res.status(403).send("Unauthorized");
@@ -51,7 +51,7 @@ router.get("/upload/:tempToken", function (req, res, next) {
   delete temporaryTokens[tempToken];
 
   // Render your HTML view here...
-  res.render("upload", { title: "Upload" });
+  res.render("upload", { title: "Upload", productCode: pcode });
 });
 
 module.exports = router;

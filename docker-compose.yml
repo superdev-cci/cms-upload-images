@@ -7,6 +7,7 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+      - /home/saintent/cms_app/image/shop/:/usr/src/app/uploads/
     container_name: cms-upload-images
     environment:
       - NODE_ENV=development
